@@ -1,0 +1,19 @@
+{
+    "files.associations": {
+        "stb_image.h": "c",
+        "stdlib.h": "c",
+        "stb_image_write.h": "c",
+        "stdio.h": "c",
+        "random": "c",
+        "color.h": "c",
+        "sort.h": "c",
+        "histogram.h": "c",
+        "math.h": "c",
+        "array": "c",
+        "deque": "c",
+        "string": "c",
+        "unordered_map": "c",
+        "vector": "c",
+        "initializer_list": "c"
+    }
+}
