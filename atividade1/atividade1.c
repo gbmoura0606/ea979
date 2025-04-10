@@ -7,10 +7,6 @@
 #define W 216
 #define H 216
 
-unsigned char *openImage(int w, int h) {
-  return stbi_load("image1.png", &w, &h, NULL, 0);
-}
-
 float minFloat(float a, float b, float c) {
   float smallest = a;
 
@@ -147,14 +143,14 @@ void extractHSV(unsigned char *img) {
   free(imgV);
 }
 
-int main() {
-  unsigned char *img = openImage(W, H);
+int main(int argc, char *argv[]) {
+  int w, h, channels;
+  unsigned char *img = stbi_load(argv[1], &w, &h, &channels, 0);
 
   extractRGB(img);
   extractCMY(img);
   extractHSV(img);
 
   stbi_image_free(img);
-
   return 0;
 }
