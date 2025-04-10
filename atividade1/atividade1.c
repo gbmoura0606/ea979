@@ -12,25 +12,25 @@ unsigned char *openImage(int w, int h) {
 }
 
 float minFloat(float a, float b, float c) {
-  float menor = a;
+  float smallest = a;
 
-  if (b < menor)
-    menor = b;
-  if (c < menor)
-    menor = c;
+  if (b < smallest)
+    smallest = b;
+  if (c < smallest)
+    smallest = c;
 
-  return menor;
+  return smallest;
 }
 
 float maxFloat(float a, float b, float c) {
-  float maior = a;
+  float largest = a;
 
-  if (b > maior)
-    maior = b;
-  if (c > maior)
-    maior = c;
+  if (b > largest)
+    largest = b;
+  if (c > largest)
+    largest = c;
 
-  return maior;
+  return largest;
 }
 
 float normalize(unsigned char v) { return v / 255.0f; }
@@ -115,18 +115,18 @@ void extractHSV(unsigned char *img) {
   unsigned char *imgS = malloc(W * H);
   unsigned char *imgV = malloc(W * H);
   int posIndex, index;
-  float hue, saturation, value;
+  float hue, saturation, value, r, g, b, min, max;
 
   for (int row = 0; row < H; row++) {
     for (int col = 0; col < W; col++) {
       posIndex = (row * W + col);
       index = (row * W + col) * 3;
 
-      float r = normalize(img[index]);
-      float g = normalize(img[index + 1]);
-      float b = normalize(img[index + 2]);
-      float min = minFloat(r, g, b);
-      float max = maxFloat(r, g, b);
+      r = normalize(img[index]);
+      g = normalize(img[index + 1]);
+      b = normalize(img[index + 2]);
+      min = minFloat(r, g, b);
+      max = maxFloat(r, g, b);
 
       hue = getHue(r, g, b, min, max);
       saturation = getSaturation(min, max);
@@ -149,11 +149,6 @@ void extractHSV(unsigned char *img) {
 
 int main() {
   unsigned char *img = openImage(W, H);
-
-  if (!img) {
-    printf("%s", stbi_failure_reason());
-    return -1;
-  }
 
   extractRGB(img);
   extractCMY(img);
